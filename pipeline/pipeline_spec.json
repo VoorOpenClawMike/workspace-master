@@ -1,0 +1,117 @@
+{
+  "global_defaults": {
+    "aspect_ratio": "9:16",
+    "resolution": "1080x1920",
+    "fps": 30,
+    "duration_target_sec": [25, 45],
+    "text_rules": {
+      "max_words_per_line": 6,
+      "safe_margin_px": { "top": 180, "bottom": 260, "left": 60, "right": 60 }
+    },
+    "audio_rules": {
+      "vo_priority_db": -3,
+      "music_duck_db": -18,
+      "loudness_target_lufs": -14
+    },
+    "transitions_allowed": ["cut","fade_8f","swipe_up_6f","split_wipe","zoom_cut","glitch_cut","slide"],
+    "naming_convention": { "pattern": "tiktok_nl_D{day}_{format}_{topic}_v{version}.mp4" },
+    "deliverables": ["master_mp4","project_json_or_aep","thumbnail_jpg_1080x1920","captions_srt"]
+  },
+  "videos": [
+    {
+      "id": "D01_budgetbreakdown_350k_haarlem",
+      "day": 1,
+      "format": "budgetbreakdown",
+      "topic": "350k_haarlem",
+      "broll_query": "apartment interior real estate",
+      "tiktok_caption": "€350k in Haarlem: wat krijg je echt? 🏠 #vastgoed #haarlem #huiskopen #starter #tiktok",
+      "assets": {
+        "video_clips": ["skyline_generic_vertical.mp4","D01_vertical.mp4"],
+        "audio": {
+          "voiceover": "vo_d01_nl.wav",
+          "music": "music_d01_bg.wav"
+        }
+      },
+      "render": {
+        "resolution": "1080x1920", "fps": 30, "codec": "H.264",
+        "filename": "tiktok_nl_D01_budgetbreakdown_350k_haarlem_v01.mp4"
+      }
+    },
+    {
+      "id": "D02_wijkvsprijs_santpoortnoord_haarlemoost",
+      "day": 2,
+      "format": "wijkvsprijs",
+      "topic": "santpoortnoord_haarlemoost",
+      "broll_query": "neighborhood street netherlands urban",
+      "tiktok_caption": "€400k: Santpoort-Noord vs Haarlem-Oost — zelfde budget, ander leven 🏘️ #vastgoed #santpoort #haarlem #tiktok",
+      "assets": {
+        "video_clips": ["D02_vertical.mp4","skyline_generic_vertical.mp4"],
+        "audio": {
+          "voiceover": "vo_D02_nl.wav",
+          "music": "music_D02_bg.wav"
+        }
+      },
+      "render": {
+        "resolution": "1080x1920", "fps": 30, "codec": "H.264",
+        "filename": "tiktok_nl_D02_wijkvsprijs_santpoortnoord_haarlemoost_v01.mp4"
+      }
+    },
+    {
+      "id": "D03_fouten_keuring_durefout",
+      "day": 3,
+      "format": "starterfouten",
+      "topic": "keuring_durefout",
+      "broll_query": "house inspection building defect",
+      "tiktok_caption": "Geen bouwkundige keuring = duur risico ⚠️ Maak deze fout niet. #vastgoed #huiskopen #starter #bouwkundigekeuring #tiktok",
+      "assets": {
+        "video_clips": ["warning_bg_dark_loop.mp4"],
+        "audio": {
+          "voiceover": "vo_d03_nl.wav",
+          "music": "music_tense_light_01.wav"
+        }
+      },
+      "render": {
+        "resolution": "1080x1920", "fps": 30, "codec": "H.264",
+        "filename": "tiktok_nl_D03_fouten_keuring_durefout_v01.mp4"
+      }
+    },
+    {
+      "id": "D05_budgetbreakdown_275k_santpoort",
+      "day": 5,
+      "format": "budgetbreakdown",
+      "topic": "275k_santpoort",
+      "broll_query": "small apartment cozy interior",
+      "tiktok_caption": "€275k in Santpoort: wat is haalbaar? 🔑 #vastgoed #santpoort #starter #huiskopen #tiktok",
+      "assets": {
+        "video_clips": ["skyline_generic_vertical.mp4"],
+        "audio": {
+          "voiceover": "vo_d05_nl.wav",
+          "music": "music_d01_bg.wav"
+        }
+      },
+      "render": {
+        "resolution": "1080x1920", "fps": 30, "codec": "H.264",
+        "filename": "tiktok_nl_D05_budgetbreakdown_275k_santpoort_v01.mp4"
+      }
+    },
+    {
+      "id": "D06_wijkvsprijs_schalkwijk_heemstede",
+      "day": 6,
+      "format": "wijkvsprijs",
+      "topic": "schalkwijk_heemstede",
+      "broll_query": "dutch neighborhood park suburban",
+      "tiktok_caption": "€400k: Schalkwijk vs Heemstede — team welke wijk? 👇 #vastgoed #heemstede #haarlem #huiskopen #tiktok",
+      "assets": {
+        "video_clips": ["skyline_generic_vertical.mp4"],
+        "audio": {
+          "voiceover": "vo_d06_nl.wav",
+          "music": "music_D02_bg.wav"
+        }
+      },
+      "render": {
+        "resolution": "1080x1920", "fps": 30, "codec": "H.264",
+        "filename": "tiktok_nl_D06_wijkvsprijs_schalkwijk_heemstede_v01.mp4"
+      }
+    }
+  ]
+}

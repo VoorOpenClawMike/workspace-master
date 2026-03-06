@@ -1,0 +1,3 @@
+# README
+
+_Content volgt - zie Perplexity output voor volledige content._

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/schemas/trend-research-report.schema.json",
+  "title": "Trend & Research Rapport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query_topic",
+    "date",
+    "platforms_analyzed",
+    "trend_summary",
+    "data_points",
+    "insights",
+    "recommendations",
+    "sources"
+  ],
+  "properties": {
+    "query_topic": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "platforms_analyzed": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["TikTok", "YouTube", "Instagram", "X", "Facebook", "LinkedIn", "Reddit", "Pinterest"]
+      }
+    },
+    "trend_summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200,
+      "description": "Doel: <150 woorden (hard word-limit afdwingen vereist extra runtime check)."
+    },
+    "data_points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["platform", "trend", "growth_rate", "examples"],
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": ["TikTok", "YouTube", "Instagram", "X", "Facebook", "LinkedIn", "Reddit", "Pinterest"]
+          },
+          "trend": {
+            "type": "string",
+            "minLength": 1
+          },
+          "growth_rate": {
+            "type": "string",
+            "pattern": "^[+\\-]?\\d+(?:[.,]\\d+)?%\\s?(?:WoW|week-on-week|week over week|vs vorige week)?$",
+            "description": "Meetbare groeivorm, bijv. '+18% WoW'."
+          },
+          "examples": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "insights": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 6,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "anyOf": [
+          { "pattern": "^https?://" },
+          { "pattern": "^OpenClaw-tool:\\s?.+" }
+        ]
+      }
+    }
+  },
+  "$comment": "Recency <= 14 dagen en trend_summary <150 woorden vereisen aanvullende runtime validatie naast JSON Schema."
+}
