@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/schemas/visual-asset-output.schema.json",
+  "title": "Visual & Asset Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["brief", "details"],
+  "properties": {
+    "brief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "project_id", "items"],
+      "properties": {
+        "date": { "type": "string", "format": "date" },
+        "project_id": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["linked_content_item_id", "script_brief_id"],
+            "properties": {
+              "linked_content_item_id": { "type": "string", "pattern": "^VID-[0-9]{3,}$" },
+              "script_brief_id": { "type": "string", "pattern": "^SB-[0-9]{3,}$" }
+            }
+          }
+        }
+      }
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/visualItem"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "visualItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "linked_content_item_id",
+        "script_brief_id",
+        "platform",
+        "estimated_duration_seconds",
+        "aspect_ratio",
+        "style_reference",
+        "shots",
+        "global_overlays",
+        "thumbnails_or_covers",
+        "asset_manifest"
+      ],
+      "properties": {
+        "linked_content_item_id": { "type": "string", "pattern": "^VID-[0-9]{3,}$" },
+        "script_brief_id": { "type": "string", "pattern": "^SB-[0-9]{3,}$" },
+        "platform": {
+          "type": "string",
+          "enum": ["TikTok", "YouTube Shorts", "Instagram Reels", "YouTube", "Instagram", "X", "LinkedIn"]
+        },
+        "estimated_duration_seconds": { "type": "integer", "minimum": 5, "maximum": 1200 },
+        "aspect_ratio": { "type": "string", "const": "9:16" },
+        "style_reference": { "type": "string", "minLength": 1 },
+        "shots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "order",
+              "time_range",
+              "type",
+              "description",
+              "camera",
+              "framing",
+              "movement_notes",
+              "on_screen_text",
+              "graphics",
+              "audio_cues",
+              "asset_placeholders"
+            ],
+            "properties": {
+              "order": { "type": "integer", "minimum": 1 },
+              "time_range": { "type": "string", "pattern": "^[0-9]+-[0-9]+s$" },
+              "type": {
+                "type": "string",
+                "enum": ["talking_head", "b_roll", "screen_record", "product_closeup", "text_only", "other"]
+              },
+              "description": { "type": "string", "minLength": 1 },
+              "camera": {
+                "type": "string",
+                "enum": ["static", "handheld", "panning", "zoom_in", "zoom_out"]
+              },
+              "framing": { "type": "string", "enum": ["close_up", "medium", "wide"] },
+              "movement_notes": { "type": "string" },
+              "on_screen_text": { "type": "string" },
+              "graphics": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 }
+              },
+              "audio_cues": { "type": "string" },
+              "asset_placeholders": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        },
+        "global_overlays": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["logo_usage", "color_palette", "font_style_notes"],
+          "properties": {
+            "logo_usage": { "type": "string" },
+            "color_palette": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string", "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" }
+            },
+            "font_style_notes": { "type": "string" }
+          }
+        },
+        "thumbnails_or_covers": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["needed", "concepts"],
+          "properties": {
+            "needed": { "type": "boolean" },
+            "concepts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["description", "main_text", "background_style"],
+                "properties": {
+                  "description": { "type": "string", "minLength": 1 },
+                  "main_text": { "type": "string", "minLength": 1, "maxLength": 60 },
+                  "background_style": {
+                    "type": "string",
+                    "enum": ["effen kleur", "gradient", "blurry screenshot", "AI-generated abstract"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "asset_manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["to_generate_ai", "to_record_original", "existing_brand_assets"],
+          "properties": {
+            "to_generate_ai": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "to_record_original": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "existing_brand_assets": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$comment": "Cross-checks between brief.items and details.items, shot timing continuity, and compliance disclaimer placement should be validated at runtime."
+}

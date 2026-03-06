@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "workspace-manager": {
+      "version": "1.0.0",
+      "installedAt": 1772577602565
+    },
+    "openclaw-workspace-pro": {
+      "version": "1.0.0",
+      "installedAt": 1772577797708
+    },
+    "workspace-standard": {
+      "version": "1.0.0",
+      "installedAt": 1772577811920
+    },
+    "agent-team-orchestration": {
+      "version": "1.0.0",
+      "installedAt": 1772577868628
+    }
+  }
+}

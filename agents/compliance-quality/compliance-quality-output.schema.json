@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/schemas/compliance-quality-output.schema.json",
+  "title": "Compliance & Kwaliteit Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["report", "detail"],
+  "properties": {
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_scope",
+        "date",
+        "reviewer_agent",
+        "overall_status",
+        "overall_risk_level",
+        "items"
+      ],
+      "properties": {
+        "review_scope": {
+          "type": "string",
+          "enum": ["script", "content_plan", "beide"]
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "reviewer_agent": {
+          "type": "string",
+          "const": "Compliance_Quality_Agent"
+        },
+        "overall_status": {
+          "type": "string",
+          "enum": ["approved", "approved_with_changes", "needs_revision", "rejected"]
+        },
+        "overall_risk_level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reviewItem"
+          }
+        }
+      }
+    },
+    "detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/reviewItem"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "reviewItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "script_brief_id",
+        "linked_content_item_id",
+        "platform",
+        "type",
+        "status",
+        "risk_level",
+        "issues",
+        "required_disclaimers",
+        "suggested_changes",
+        "final_recommendation"
+      ],
+      "properties": {
+        "script_brief_id": {
+          "type": "string",
+          "pattern": "^(SB-[0-9]{3,}|N/A)$"
+        },
+        "linked_content_item_id": {
+          "type": "string",
+          "pattern": "^(VID-[0-9]{3,}|N/A)$"
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "TikTok",
+            "YouTube Shorts",
+            "Instagram Reels",
+            "YouTube",
+            "Instagram",
+            "X",
+            "LinkedIn",
+            "N/A"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": ["script", "content_plan"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["approved", "approved_with_changes", "needs_revision", "rejected"]
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["category", "severity", "description", "example_excerpt", "recommendation"],
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": ["legal", "platform_policy", "brand_voice", "clarity", "safety", "other"]
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["minor", "major", "critical"]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "example_excerpt": {
+                "type": "string"
+              },
+              "recommendation": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "required_disclaimers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "suggested_changes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["hook", "body", "cta"],
+          "properties": {
+            "hook": { "type": "string" },
+            "body": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["order", "original", "suggested"],
+                "properties": {
+                  "order": { "type": "integer", "minimum": 1 },
+                  "original": { "type": "string" },
+                  "suggested": { "type": "string", "minLength": 1 }
+                }
+              }
+            },
+            "cta": { "type": "string" }
+          }
+        },
+        "final_recommendation": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$comment": "Consistency checks between report.items and detail.items, plus status/risk aggregation logic, should be enforced at runtime in addition to JSON Schema."
+}
