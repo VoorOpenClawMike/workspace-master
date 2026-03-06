@@ -1,0 +1,4 @@
+{
+  "video-pipeline": ["file-exists", "min-size", "duration-match"],
+  "tts-generation": ["file-exists", "audio-valid"]
+}
