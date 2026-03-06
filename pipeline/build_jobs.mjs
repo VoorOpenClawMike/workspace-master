@@ -16,7 +16,8 @@ const { global_defaults, videos } = spec;
 for (const video of videos) {
   console.log("=== JOB VOOR VIDEO:", video.id, "===");
   console.log("Bestand:", video.render.filename);
-  console.log("Duur:", video.timeline.duration_sec, "sec");
+  const durationSec = video.timeline?.duration_sec ?? estimateDurationSec(video, global_defaults);
+  console.log("Duur:", durationSec, "sec");
   console.log("Clips:", video.assets.video_clips.join(", "));
   console.log("Voice-over:", video.assets.audio.voiceover);
   console.log("Music:", video.assets.audio.music);
@@ -44,4 +45,16 @@ function buildFakeFfmpegCommand(video, global) {
     "-b:a", "256k",
     `"${out}"`
   ].join(" ");
+}
+
+
+function estimateDurationSec(video, globalDefaults = {}) {
+  const target = globalDefaults.duration_target_sec;
+  if (Array.isArray(target) && target.length === 2) {
+    const [minSec, maxSec] = target;
+    return Math.round((Number(minSec) + Number(maxSec)) / 2);
+  }
+
+  const clipCount = Array.isArray(video.assets?.video_clips) ? video.assets.video_clips.length : 0;
+  return Math.max(20, clipCount * 8);
 }

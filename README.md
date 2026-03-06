@@ -15,7 +15,7 @@ Multi-agent content-productie systeem voor vastgoed-video's (TikTok, Reels, Shor
 
 ### 1. Clone repo
 ```
-git clone https://github.com/VoorOpenClawMike/workspace.git
+git clone https://github.com/VoorOpenClawMike/workspace-master.git
 cd workspace
 ```
 
@@ -27,7 +27,10 @@ npm install
 ### 3. Setup .env
 ```
 cp .env.example .env
-# Vul API keys in
+# Vul API keys + lokale binary paths in
+# FFMPEG_PATH=ffmpeg
+# EDGE_TTS_PATH=edge-tts
+# WORKSPACE_PATH=.
 ```
 
 ### 4. Test pipeline
