@@ -1,17 +1,20 @@
-﻿import { execFileSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, statSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { fetchBroll } from "../fetch_broll.mjs";
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const FFMPEG = "C:\\Users\\MikeDonker\\ffmpeg\\bin\\ffmpeg.exe";
-const EDGE_TTS = "C:\\Users\\MikeDonker\\AppData\\Local\\Python\\pythoncore-3.14-64\\Scripts\\edge-tts.exe";
-const WS    = "C:\\Users\\MikeDonker\\.openclaw\\workspace";
+const FFMPEG = process.env.FFMPEG_PATH || "ffmpeg";
+const EDGE_TTS = process.env.EDGE_TTS_PATH || "edge-tts";
+const WS = process.env.WORKSPACE_PATH || resolve(__dirname, "..");
 const SPEC  = resolve(__dirname, "pipeline_spec.json");
 
 function abs(p) { return resolve(WS, p); }
+
+async function fetchBroll(query) {
+  console.log(`  [BROLL] Stub actief, lokale fallback voor query: "${query}"`);
+  return null;
+}
 
 function fileIsReal(p, minBytes = 10_000) {
   try { return statSync(p).size > minBytes; } catch { return false; }
