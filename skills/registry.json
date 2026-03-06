@@ -1,4 +1,75 @@
 {
   "version": "1.0",
-  "skills": []
+  "skills": [
+    {
+      "name": "agent-team-orchestration",
+      "description": "Orchestrate multi-agent teams with defined roles, task lifecycles, handoff protocols, and review workflows. Use when: (1) Setting up a team of 2+ agents with different specializations, (2) Defining task routing and lifecycle (inbox → spec → build → review → done), (3) Creating handoff protocols between agents, (4) Establishing review and quality gates, (5) Managing async communication and artifact sharing between agents.",
+      "tools": [],
+      "path": "skills/agent-team-orchestration/SKILL.md"
+    },
+    {
+      "name": "github-workspace-editor",
+      "description": "Leest en wijzigt bestanden in deze GitHub-workspace. Kan prompts, configs en scripts aanpassen. Genereert commit-voorstellen voor review door gebruiker.",
+      "tools": [
+        "read",
+        "write",
+        "spawn"
+      ],
+      "path": "skills/github-workspace-editor/SKILL.md"
+    },
+    {
+      "name": "openclaw-workspace-pro",
+      "description": "Production-ready workspace setup for OpenClaw agents. Implements artifact workflows, secrets management, memory compaction, and long-running agent patterns based on OpenAI's Shell + Skills best practices. One-command installation transforms your workspace into a production-ready environment.",
+      "tools": [],
+      "path": "skills/openclaw-workspace-pro/SKILL.md"
+    },
+    {
+      "name": "promo-content-writer",
+      "description": "Genereert platform-specifieke promo-content: titels, hooks, beschrijvingen, hashtags en CTA's voor TikTok, Reels, Shorts en andere social media.",
+      "tools": [
+        "none"
+      ],
+      "path": "skills/promo-content-writer/SKILL.md"
+    },
+    {
+      "name": "telemetry-logger",
+      "description": "Logt alle workflow-events, agent-interacties en outputs voor monitoring, debugging en self-improvement. Onderhoudt IMPROVEMENTS.md voor optimalisatie-ideeën.",
+      "tools": [
+        "write",
+        "read"
+      ],
+      "path": "skills/telemetry-logger/SKILL.md"
+    },
+    {
+      "name": "video-ffmpeg-pipeline",
+      "description": "Wrapper rond de bestaande video-rendering pipeline (TTS + FFmpeg). Zet JSON-scripts om naar MP4-video's met voiceover, B-roll en text overlays.",
+      "tools": [
+        "read",
+        "write",
+        "spawn"
+      ],
+      "path": "skills/video-ffmpeg-pipeline/SKILL.md"
+    },
+    {
+      "name": "video-sora2-generator",
+      "description": "Genereert video's via OpenAI Sora 2 API (text-to-video of image-to-video). Optimaliseert prompts voor realistische scenes, camera control en audio sync.",
+      "tools": [
+        "outbound",
+        "write"
+      ],
+      "path": "skills/video-sora2-generator/SKILL.md"
+    },
+    {
+      "name": "workspace-manager",
+      "description": "Workspace setup and organization assistant for ClawPad users. Triggers on: (1) First-time setup - \"just set up ClawPad\", \"new workspace\", \"help me organize\" (2) Project creation - \"new project\", \"create folder structure\" (3) Workspace maintenance - \"reorganize\", \"clean up workspace\", \"where should I put\" (4) Document creation - \"create a plan\", \"new tracking doc\", \"start a runbook\"",
+      "tools": [],
+      "path": "skills/workspace-manager/SKILL.md"
+    },
+    {
+      "name": "workspace-standard",
+      "description": "Set up and maintain a structured OpenClaw workspace with project boundaries, role-based file taxonomy, and memory budgets. Use when: (1) bootstrapping a new workspace, (2) migrating from a flat docs/ structure, (3) adding a new project, (4) unsure where to write something, (5) running workspace maintenance, (6) auditing workspace health. Provides the directory layout, ROLE front-matter spec, MEMORY.md budget rules, and maintenance procedures.",
+      "tools": [],
+      "path": "skills/workspace-standard/SKILL.md"
+    }
+  ]
 }
