@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {"type": "string"},
+      "seed": {"type": "string"},
+      "status": {"type": "string"},
+      "team": {"type": "string", "enum": ["discovery"]},
+      "created_at": {"type": "string"},
+      "priority": {"type": "number"}
+    },
+    "required": ["id", "seed", "status", "team"]
+  }
+}

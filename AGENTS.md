@@ -47,3 +47,11 @@ Alle agents werken binnen de spelregels van OpenClaw: geen production‑secrets 
 - **`manager-email`** → `agents/email/manager-email`
 - **`composer-email`** → `agents/email/composer-email`
 - **`sender-email`** → `agents/email/sender-email` ⚠️ approval vereist
+
+### Discovery-team agents
+
+- **`manager-discovery`** → `agents/discovery/manager-discovery`
+- **`explorer`** → `agents/discovery/explorer`
+- **`validator`** → `agents/discovery/validator`
+- **`synthesizer`** → `agents/discovery/synthesizer`
+

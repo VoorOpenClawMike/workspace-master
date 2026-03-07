@@ -169,6 +169,62 @@
       ],
       "path": "agents/email/sender-email/SYSTEM_PROMPT.md",
       "warning": "approval required"
+    },
+    {
+      "name": "manager-discovery",
+      "description": "Orchestrator voor autonome business discovery met self-directed research loops",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/discovery/manager-discovery/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "explorer",
+      "description": "Autonome onderzoeker die lead chains 3-5 levels diep volgt voor business opportunities",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/discovery/explorer/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "validator",
+      "description": "Valideert gevonden opportunities op markt, concurrentie, haalbaarheid en revenue model",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/discovery/validator/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "synthesizer",
+      "description": "Schrijft Codex-ready business idea rapporten van gevalideerde opportunities",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/discovery/synthesizer/SYSTEM_PROMPT.md"
     }
   ]
 }
