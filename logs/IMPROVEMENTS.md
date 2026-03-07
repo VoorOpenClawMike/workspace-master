@@ -61,3 +61,9 @@
 - Team router voor task distribution
 - CLI commands voor team status/list
 - Unit tests voor router logic
+
+## Phase 10 (approval-workflow)
+- Approval queue voor email/discovery outputs
+- Telegram commands /approve /reject /pending
+- Approval handler met state management
+- Validator voor approval integrity
