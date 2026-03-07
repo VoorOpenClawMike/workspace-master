@@ -5,7 +5,9 @@
     "heartbeat": "node orchestration/heartbeat.mjs",
     "check": "node --check pipeline/*.mjs orchestration/*.mjs",
     "team:status": "node orchestration/team-router.mjs --status",
-    "team:list": "node orchestration/team-router.mjs --list"
+    "team:list": "node orchestration/team-router.mjs --list",
+    "dashboard": "node orchestration/dashboard.mjs",
+    "health": "node orchestration/health-check.mjs --json"
   },
   "dependencies": {
     "dotenv": "^17.3.1",

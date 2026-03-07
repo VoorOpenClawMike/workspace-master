@@ -67,3 +67,9 @@
 - Telegram commands /approve /reject /pending
 - Approval handler met state management
 - Validator voor approval integrity
+
+## Phase 11 (health-dashboard)
+- Health check per team (memory, queue, logs, registry)
+- ASCII dashboard met status overview
+- Cron job voor automated health checks
+- Telegram /dashboard command
