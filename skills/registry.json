@@ -70,6 +70,62 @@
       "description": "Set up and maintain a structured OpenClaw workspace with project boundaries, role-based file taxonomy, and memory budgets. Use when: (1) bootstrapping a new workspace, (2) migrating from a flat docs/ structure, (3) adding a new project, (4) unsure where to write something, (5) running workspace maintenance, (6) auditing workspace health. Provides the directory layout, ROLE front-matter spec, MEMORY.md budget rules, and maintenance procedures.",
       "tools": [],
       "path": "skills/workspace-standard/SKILL.md"
+    },
+    {
+      "name": "manager-school",
+      "description": "Orchestrator voor school/onderzoekstaken met workflow opdracht → research → writing → review → eindversie.",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/school/manager-school/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "research-school",
+      "description": "Onderzoeksagent voor bronverzameling, betrouwbaarheidsscore en researchrapporten voor schooltaken.",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/school/research-school/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "writer-school",
+      "description": "Schrijver die research omzet naar Nederlandse rapporten/werkstukken/essays met bronvermelding.",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/school/writer-school/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "review-school",
+      "description": "Reviewer die drafts controleert op structuur, broncorrectheid, taal en kwaliteitscriteria.",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/school/review-school/SYSTEM_PROMPT.md"
     }
   ]
 }
