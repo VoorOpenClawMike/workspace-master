@@ -55,3 +55,9 @@
 - Command routing met RBAC
 - Team-agnostic status overview
 - Webhook + error handling
+
+## Phase 9 (team-registry)
+- Centrale team registry met versioning
+- Team router voor task distribution
+- CLI commands voor team status/list
+- Unit tests voor router logic

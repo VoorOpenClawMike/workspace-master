@@ -3,7 +3,9 @@
     "render": "node pipeline/render_all.mjs",
     "validate": "node validation/output-evaluator.mjs",
     "heartbeat": "node orchestration/heartbeat.mjs",
-    "check": "node --check pipeline/*.mjs orchestration/*.mjs"
+    "check": "node --check pipeline/*.mjs orchestration/*.mjs",
+    "team:status": "node orchestration/team-router.mjs --status",
+    "team:list": "node orchestration/team-router.mjs --list"
   },
   "dependencies": {
     "dotenv": "^17.3.1",
