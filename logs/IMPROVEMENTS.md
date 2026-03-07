@@ -40,3 +40,12 @@
 - Email validator voor injection prevention
 - Drafts opslag in output/email/drafts/
 - Sent logging in logs/email-sent.jsonl
+
+## Phase 7 (codex-discovery-team)
+- Discovery-team: 4 agents voor autonome business/idee ontdekking
+- Explorer volgt lead chains 3-5 levels diep
+- Validator toetst op markt, concurrentie, haalbaarheid (score >= 7 = go)
+- Synthesizer schrijft Codex-ready business idea rapporten
+- Volledig geïsoleerd van video/school/email teams
+- Eigen memory, task queue, output map en event logging
+- Max 3 parallelle explore loops

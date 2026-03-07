@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["discovery_state", "active_loops", "report_reference"],
+  "properties": {
+    "discovery_state": {
+      "type": "object",
+      "required": ["loop_id", "status", "seed", "created_at", "findings_count"],
+      "properties": {
+        "loop_id": {"type": "string"},
+        "status": {"type": "string", "enum": ["seed", "exploring", "validating", "synthesizing", "report_ready", "approved", "archived"]},
+        "seed": {"type": "string"},
+        "created_at": {"type": "string"},
+        "findings_count": {"type": "number"}
+      }
+    },
+    "active_loops": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
+    "report_reference": {"type": "string"}
+  }
+}
