@@ -88,6 +88,13 @@ function suggestFix(message) {
     ];
   }
 
+  if (lower.includes('task d01 stuck') || (lower.includes('stuck') && lower.includes('30m'))) {
+    return [
+      'Task D01 stuck >30m → run error-recovery.mjs',
+      'Bekijk details in logs/error-recovery.jsonl voor de laatste recovery-acties.',
+    ];
+  }
+
   return [
     'Controleer recente commits rondom deze fout en vergelijk met laatste werkende state.',
     'Reproduceer fout lokaal met exact hetzelfde commando en verhoog logging detailniveau.',

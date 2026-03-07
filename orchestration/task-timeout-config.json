@@ -1,0 +1,6 @@
+{
+  "video": {"timeout_minutes": 30, "max_retries": 2},
+  "school": {"timeout_minutes": 60, "max_retries": 3},
+  "email": {"timeout_minutes": 5, "max_retries": 1},
+  "discovery": {"timeout_minutes": 120, "max_retries": 2}
+}
