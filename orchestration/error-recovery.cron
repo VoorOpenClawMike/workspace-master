@@ -1,0 +1,1 @@
+*/15 * * * * cd /path/to/workspace-master && node orchestration/error-recovery.mjs --auto-recover

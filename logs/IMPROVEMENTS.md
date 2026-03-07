@@ -73,3 +73,9 @@
 - ASCII dashboard met status overview
 - Cron job voor automated health checks
 - Telegram /dashboard command
+
+## Phase 12 (error-recovery)
+- Auto-detect stuck tasks per team
+- Configurable timeouts + max retries
+- Self-healing via cron (elke 15 min)
+- Recovery logging voor postmortem
