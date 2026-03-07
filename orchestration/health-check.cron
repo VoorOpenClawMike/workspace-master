@@ -1,0 +1,1 @@
+*/5 * * * * cd /path/to/workspace-master && node orchestration/health-check.mjs --alert-on-error

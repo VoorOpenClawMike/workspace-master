@@ -5,12 +5,18 @@ import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
 import { approve, reject, listPending } from '../orchestration/approval-handler.mjs';
 
 dotenv.config();
 
 const execFileAsync = promisify(execFile);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const repoRoot = path.resolve(__dirname, '..');
+const dashboardScriptPath = path.resolve(repoRoot, 'orchestration/dashboard.mjs');
 
 const PORT = Number(process.env.PORT || 3000);
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -100,7 +106,7 @@ function parseCommand(text) {
   const [rawTeam, ...rest] = tokens;
   const teamId = rawTeam.replace(/^\//, '').toLowerCase();
 
-  if (['status', 'approve', 'reject', 'pending'].includes(teamId)) {
+  if (['status', 'approve', 'reject', 'pending', 'dashboard'].includes(teamId)) {
     return { teamId, action: teamId, args: rest };
   }
 
@@ -161,8 +167,21 @@ function getStatusMessage() {
     'Gateway status:',
     ...teamLines,
     '',
-    'Beschikbaar: /video, /school, /email, /discovery, /status, /pending, /approve <id>, /reject <id> [reason]',
+    'Beschikbaar: /video, /school, /email, /discovery, /status, /dashboard, /pending, /approve <id>, /reject <id> [reason]',
   ].join('\n');
+}
+
+async function runDashboard() {
+  const { stdout, stderr } = await execFileAsync('node', [dashboardScriptPath], {
+    cwd: repoRoot,
+    timeout: 30_000,
+  });
+
+  if (stderr && stderr.trim()) {
+    console.warn(`[dashboard] stderr: ${stderr.trim()}`);
+  }
+
+  return stdout?.trim() || '(dashboard gaf geen output)';
 }
 
 function buildManagerPrompt(teamId, action, args) {
@@ -241,6 +260,12 @@ async function handleCommand(update) {
   if (parsed.teamId === 'pending') {
     const pendingItems = await listPending();
     await sendTelegramMessage(chatId, getPendingPreview(pendingItems));
+    return;
+  }
+
+  if (parsed.teamId === 'dashboard') {
+    const dashboard = await runDashboard();
+    await sendTelegramMessage(chatId, `📊 Health dashboard\n\n${dashboard}`);
     return;
   }
 
