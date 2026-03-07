@@ -31,3 +31,12 @@
 - Toegevoegd: `agents/school/manager-school/manager-school-output.schema.json` voor valideerbare workflow/final output met school-artifacts.
 - Toegevoegd: `memory/school-context.json` als school memory-laag en `orchestration/school-task-queue.schema.json` met teamveld `school`.
 - Toegevoegd: `output/school/.gitkeep` en registry/AGENTS updates voor discoverability van het school-team.
+
+## Phase 5 (codex-email-team)
+- Email-team agents met approval-workflow
+- OAuth2 config in .env.example
+- Rate limiter (5/uur hard cap)
+- Email validator voor injection prevention
+- Drafts opslag in output/email/drafts/
+- Sent logging in logs/email-sent.jsonl
+
