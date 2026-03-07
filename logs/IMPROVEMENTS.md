@@ -17,3 +17,10 @@
 - Toegevoegd: `validation/validators.json` met validator-profielen voor `video-pipeline` en `tts-generation`.
 - Toegevoegd: `memory/context.json` als geheugenlaag voor render-status, error history en optimalisatie-notities.
 - `skills/registry.json`: automatisch gevuld op basis van alle `SKILL.md` bestanden (naam, beschrijving, tools).
+
+
+## Phase 3 (codex-fase3)
+- Toegevoegd: `orchestration/auto-fix.mjs` voor analyse van `logs/events.jsonl` met top 3 terugkerende fouten en fix-suggesties naar `logs/auto-fix-suggestions.json` (zonder auto-apply).
+- Toegevoegd: `orchestration/rollback.mjs` met backup-branch creatie, rollback via `--to <sha>`, en historiebeheer in `memory/rollback-history.json` (laatste 5 states).
+- `package.json`: scripts toegevoegd voor `render`, `validate`, `heartbeat` en `check`.
+- `README.md`: nieuwe secties toegevoegd voor scripts, heartbeat/validator/auto-fix usage en troubleshooting.

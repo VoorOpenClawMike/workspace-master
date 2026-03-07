@@ -71,6 +71,63 @@ Direct (command-line): node pipeline/render_all.mjs
 
 Via OpenClaw CLI (als je OpenClaw hebt): openclaw agent --call manager-orchestrator "Maak video D07"
 
+
+## Scripts
+
+Beschikbare npm scripts:
+
+- `npm run render` → voert de volledige render-pipeline uit via `pipeline/render_all.mjs`.
+- `npm run validate -- --file <path> [--expected-duration <sec>]` → valideert output op bestaan, grootte en (optioneel) duur.
+- `npm run heartbeat` → voert een heartbeat-check uit en logt resultaat in `logs/events.jsonl`.
+- `npm run check` → syntaxischeck op alle pipeline- en orchestration-scripts.
+
+### Heartbeat usage
+
+```bash
+npm run heartbeat
+```
+
+De heartbeat controleert of `pipeline/render_all.mjs` actief is en schrijft een success/error event naar `logs/events.jsonl`.
+
+### Validator usage
+
+```bash
+npm run validate -- --file output/D01_vertical_final.mp4 --expected-duration 30
+```
+
+De validator geeft JSON terug met `valid`, `errors` en `warnings`.
+
+### Auto-fix usage
+
+```bash
+node orchestration/auto-fix.mjs
+```
+
+Dit script analyseert `logs/events.jsonl`, pakt de top 3 terugkerende errors en schrijft alleen suggesties (geen automatische fixes) naar `logs/auto-fix-suggestions.json`.
+
+### Rollback usage
+
+Maak eerst een backup state:
+
+```bash
+node orchestration/rollback.mjs
+```
+
+Rollback naar een specifieke commit:
+
+```bash
+node orchestration/rollback.mjs --to <sha>
+```
+
+De rollback history wordt bijgehouden in `memory/rollback-history.json` (laatste 5 states).
+
+## Troubleshooting
+
+- **`npm run heartbeat` geeft error**: start eerst `npm run render` in een aparte terminal zodat het pipelineproces detecteerbaar is.
+- **Validator faalt op duur**: controleer `--expected-duration` en vergelijk met `ffprobe` output.
+- **`ffprobe`/`ffmpeg` ontbreekt**: installeer FFmpeg en zet binaries in `PATH` of configureer `FFMPEG_PATH`.
+- **Geen auto-fix resultaten**: controleer of `logs/events.jsonl` bestaat en error-events bevat.
+
 ## Support
 
 Issues → Open GitHub Issue. Vragen → Zie docs/
