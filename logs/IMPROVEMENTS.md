@@ -49,3 +49,9 @@
 - Volledig geïsoleerd van video/school/email teams
 - Eigen memory, task queue, output map en event logging
 - Max 3 parallelle explore loops
+
+## Phase 8 (telegram-gateway)
+- Telegram bot gateway voor alle 4 teams
+- Command routing met RBAC
+- Team-agnostic status overview
+- Webhook + error handling
