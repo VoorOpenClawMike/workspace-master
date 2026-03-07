@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "teams": [
+    {
+      "id": "video",
+      "manager": "manager-orchestrator",
+      "status": "active",
+      "task_queue": "orchestration/task-queue.schema.json"
+    },
+    {
+      "id": "school",
+      "manager": "manager-school",
+      "status": "active",
+      "task_queue": "orchestration/school-task-queue.schema.json"
+    },
+    {
+      "id": "email",
+      "manager": "manager-email",
+      "status": "active",
+      "task_queue": "orchestration/email-task-queue.schema.json"
+    },
+    {
+      "id": "discovery",
+      "manager": "manager-discovery",
+      "status": "active",
+      "task_queue": "orchestration/discovery-task-queue.schema.json"
+    }
+  ]
+}
