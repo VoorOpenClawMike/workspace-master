@@ -126,6 +126,49 @@
         "write"
       ],
       "path": "agents/school/review-school/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "manager-email",
+      "description": "Orchestrator voor e-mailcommunicatie met workflow compose → approval → send en strikte approval-gate.",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/email/manager-email/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "composer-email",
+      "description": "Schrijft professionele e-maildrafts op basis van onderwerp, ontvanger en manager-context met templates.",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/email/composer-email/SYSTEM_PROMPT.md"
+    },
+    {
+      "name": "sender-email",
+      "description": "Verzendt goedgekeurde e-maildrafts met OAuth2, rate limiting en logging (warning: approval required).",
+      "tools": [
+        "sessions_spawn",
+        "sessions_send",
+        "sessions_list",
+        "memory_search",
+        "memory_get",
+        "read",
+        "write"
+      ],
+      "path": "agents/email/sender-email/SYSTEM_PROMPT.md",
+      "warning": "approval required"
     }
   ]
 }

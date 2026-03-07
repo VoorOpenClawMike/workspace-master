@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["email_state", "draft_reference"],
+  "properties": {
+    "email_state": {
+      "type": "object",
+      "required": ["draft_id", "status", "created_at", "approved_by", "sent_at"],
+      "properties": {
+        "draft_id": {"type": "string"},
+        "status": {"type": "string", "enum": ["draft", "pending_approval", "approved", "sent", "rejected"]},
+        "created_at": {"type": "string"},
+        "approved_by": {"type": "string"},
+        "sent_at": {"type": "string"}
+      }
+    },
+    "draft_reference": {"type": "string"}
+  }
+}
