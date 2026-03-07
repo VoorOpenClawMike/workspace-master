@@ -39,3 +39,10 @@ Alle agents werken binnen de spelregels van OpenClaw: geen production‑secrets 
 - **`research-school`** → `agents/school/research-school`
 - **`writer-school`** → `agents/school/writer-school`
 - **`review-school`** → `agents/school/review-school`
+
+### Email-team agents
+
+- **`manager-email`** → `agents/email/manager-email`
+- **`composer-email`** → `agents/email/composer-email`
+- **`sender-email`** → `agents/email/sender-email` ⚠️ approval vereist
+
