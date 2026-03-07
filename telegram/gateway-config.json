@@ -1,0 +1,8 @@
+{
+  "teams": [
+    {"id": "video", "manager": "manager-orchestrator", "commands": ["render", "status"]},
+    {"id": "school", "manager": "manager-school", "commands": ["rapport", "help"]},
+    {"id": "email", "manager": "manager-email", "commands": ["draft", "approve", "send"]},
+    {"id": "discovery", "manager": "manager-discovery", "commands": ["zoek", "archive", "approve"]}
+  ]
+}
