@@ -6,6 +6,7 @@ import process from 'node:process';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import dotenv from 'dotenv';
+import { approve, reject, listPending } from '../orchestration/approval-handler.mjs';
 
 dotenv.config();
 
@@ -99,8 +100,8 @@ function parseCommand(text) {
   const [rawTeam, ...rest] = tokens;
   const teamId = rawTeam.replace(/^\//, '').toLowerCase();
 
-  if (teamId === 'status') {
-    return { teamId, action: 'status', args: [] };
+  if (['status', 'approve', 'reject', 'pending'].includes(teamId)) {
+    return { teamId, action: teamId, args: rest };
   }
 
   const [action, ...args] = rest;
@@ -160,7 +161,7 @@ function getStatusMessage() {
     'Gateway status:',
     ...teamLines,
     '',
-    'Beschikbaar: /video, /school, /email, /discovery, /status',
+    'Beschikbaar: /video, /school, /email, /discovery, /status, /pending, /approve <id>, /reject <id> [reason]',
   ].join('\n');
 }
 
@@ -172,6 +173,29 @@ function buildManagerPrompt(teamId, action, args) {
     `Args: ${argText}`,
     'Voer de taak uit en rapporteer compact status/resultaat + eventuele vervolgstap.',
   ].join('\n');
+}
+
+function getPendingPreview(items) {
+  if (items.length === 0) {
+    return 'Geen pending approvals.';
+  }
+
+  const lines = items.slice(0, 20).map((item) => (`- ${item.id} | team=${item.team} | type=${item.type} | ref=${item.reference}`));
+  const remainder = items.length > 20 ? `
+... en ${items.length - 20} extra` : '';
+  return `Pending approvals (${items.length}):
+${lines.join('\n')}${remainder}`;
+}
+
+async function notifyTeamManagerForApproval(item) {
+  const team = gatewayConfig.teamsById.get(item.team);
+  if (!team) {
+    return `Geen managerconfig gevonden voor team ${item.team}.`;
+  }
+
+  const args = [item.id, item.type, item.reference];
+  await invokeManagerAgent(team, 'approve', args);
+  return `Manager ${team.manager} geïnformeerd voor approval ${item.id}.`;
 }
 
 async function invokeManagerAgent(team, action, args) {
@@ -211,6 +235,38 @@ async function handleCommand(update) {
 
   if (parsed.teamId === 'status') {
     await sendTelegramMessage(chatId, getStatusMessage());
+    return;
+  }
+
+  if (parsed.teamId === 'pending') {
+    const pendingItems = await listPending();
+    await sendTelegramMessage(chatId, getPendingPreview(pendingItems));
+    return;
+  }
+
+  if (parsed.teamId === 'approve') {
+    const [id] = parsed.args;
+    if (!id) {
+      await sendTelegramMessage(chatId, 'Gebruik: /approve <id>');
+      return;
+    }
+
+    const approvedItem = await approve(id);
+    const notification = await notifyTeamManagerForApproval(approvedItem);
+    await sendTelegramMessage(chatId, `✅ Approval verwerkt: ${approvedItem.id}
+${notification}`);
+    return;
+  }
+
+  if (parsed.teamId === 'reject') {
+    const [id, ...reasonParts] = parsed.args;
+    if (!id) {
+      await sendTelegramMessage(chatId, 'Gebruik: /reject <id> [reason]');
+      return;
+    }
+    const reason = reasonParts.length > 0 ? reasonParts.join(' ') : 'Geen reden opgegeven';
+    const rejectedItem = await reject(id, reason);
+    await sendTelegramMessage(chatId, `🛑 Rejected: ${rejectedItem.id} (reason: ${reason})`);
     return;
   }
 
