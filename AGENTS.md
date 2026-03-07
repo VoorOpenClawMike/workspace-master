@@ -31,3 +31,11 @@ Deze agents hebben hun eigen sub‑workspaces maar worden logisch gezien vanuit 
 - De **Alerts** agent bewaakt storingen, kritieke meldingen en belangrijke cron‑jobs.
 
 Alle agents werken binnen de spelregels van OpenClaw: geen production‑secrets in tekst, geen ongevraagde destructieve acties, en altijd eerst uitleggen wat er gebeurt voordat er iets groots wordt aangepast.
+
+
+### School-team agents
+
+- **`manager-school`** → `agents/school/manager-school`
+- **`research-school`** → `agents/school/research-school`
+- **`writer-school`** → `agents/school/writer-school`
+- **`review-school`** → `agents/school/review-school`

@@ -24,3 +24,10 @@
 - Toegevoegd: `orchestration/rollback.mjs` met backup-branch creatie, rollback via `--to <sha>`, en historiebeheer in `memory/rollback-history.json` (laatste 5 states).
 - `package.json`: scripts toegevoegd voor `render`, `validate`, `heartbeat` en `check`.
 - `README.md`: nieuwe secties toegevoegd voor scripts, heartbeat/validator/auto-fix usage en troubleshooting.
+
+## Phase 4 (codex-school-team)
+- Toegevoegd: `agents/school/manager-school/SYSTEM_PROMPT.md` als school-orchestrator met lifecycle, retry-regel en verplichte outputblokken.
+- Toegevoegd: complete school-team agentset (`research-school`, `writer-school`, `review-school`) met eigen SYSTEM_PROMPT, AGENTS en TOOLS.
+- Toegevoegd: `agents/school/manager-school/manager-school-output.schema.json` voor valideerbare workflow/final output met school-artifacts.
+- Toegevoegd: `memory/school-context.json` als school memory-laag en `orchestration/school-task-queue.schema.json` met teamveld `school`.
+- Toegevoegd: `output/school/.gitkeep` en registry/AGENTS updates voor discoverability van het school-team.
